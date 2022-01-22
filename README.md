@@ -27,7 +27,7 @@ For this PoC we used a Kali Linux 2020.10 machine for the attacker and a Ubuntu
 The first thing to be done on the attacker's machine is to enable ip forwarding
 using the following command:
 ```
-sysctl -2 net.ipv4.ip_forward=1
+sysctl -w net.ipv4.ip_forward=1
 ```
 This way, when the attacker receives packets from the victim, they will be then
 forwarded to the destination ip address.
@@ -68,4 +68,7 @@ To check that the attack worked we used a tool called [Wireshark](https://www.wi
 The file that contains the captured packets, *capture.pcap*, is added to
 Wireshark and we will filter the data so that we can see only the HTTP stream.
 Now we get the one containin the GET request and, as we can see from the
-![screenshot](Wireshark.jpeg), we can detect the username and password.
+fallowing two images, we can detect the username and password and we can 
+get the page result as well.
+![screenshot](./images/capture.png)
+![screenshot](./images/file.png)
