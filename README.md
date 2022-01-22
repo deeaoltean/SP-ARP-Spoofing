@@ -17,7 +17,7 @@ the attacker's machine instead of each other
 between victim and router.
 
 # Topology
-For this PoC we used a Kali Linux 2020.10 machine for the attacker and a Ubuntu 
+For this PoC we used a Kali Linux 2020.4 machine for the attacker and a Ubuntu 
 20.10 machine for the victim:
 * Attacker - ip address: 192.168.1.8/24
 * Victim - ip address: 192.168.1.10/24 
